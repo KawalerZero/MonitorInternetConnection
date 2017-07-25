@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using System.Windows.Forms;
 
 namespace MonitorInternetConnectionApplication
 {
 	public class PingHandler
 	{
-		private static List<string> listOfAddressIP = new List<string>();
-		private static int numberOfPing = 0;
+		private List<string> listOfAddressIP = new List<string>();
+		private int numberOfPing = 0;
 		public PingHandler()
 		{
 			listOfAddressIP.Add("139.130.4.5");
@@ -48,7 +49,7 @@ namespace MonitorInternetConnectionApplication
 			}
 			catch (Exception ex)
 			{
-
+				MessageBox.Show(ex.Message.ToString());
 			}
 		}
 	}
