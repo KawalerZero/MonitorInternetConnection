@@ -7,7 +7,6 @@ namespace MonitorInternetConnectionApplication
 		private static PingHandler pH = new PingHandler();
 		static void Main(string[] args)
 		{
-			xxx
 			_timer = new Timer();
 			_timer.Elapsed += aTimer_Elapsed;
 			_timer.Interval = 60000;
