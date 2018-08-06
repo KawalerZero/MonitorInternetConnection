@@ -1,50 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
-
 namespace MonitorInternetConnectionApplication
 {
-	public class PingHandler
+	public static class PingHandler
 	{
-		private List<string> listOfAddressIP = new List<string>();
-		private int numberOfPing = 0;
-		public PingHandler()
+		private static string PATH = @"d:\LogsMonitorInternetConnection\";
+		private static string SECOND_PART_OF_FILENAME = "Logs.txt";
+		private static string[] ARRAY_OF_IP_ADDRESSES = { "139.130.4.5", "204.15.21.255", "212.77.101.5", "178.33.51.179", "8.8.8.8" };
+		private static int PING_NUMBER = 0;
+
+		public static void Ping()
 		{
-			listOfAddressIP.Add("139.130.4.5");
-			listOfAddressIP.Add("204.15.21.255");
-			listOfAddressIP.Add("212.77.101.5");
-			listOfAddressIP.Add("178.33.51.179");
-			listOfAddressIP.Add("8.8.8.8");
-		}
-		public void Ping()
-		{
-			Ping pinger = new Ping();
+			Ping ping = new Ping();
 			try
 			{
-				PingReply reply = pinger.Send(listOfAddressIP[numberOfPing]);
-				numberOfPing++;
-				if (numberOfPing > listOfAddressIP.Count - 1)
+				var pingReply = ping.Send(ARRAY_OF_IP_ADDRESSES[PING_NUMBER]);
+				PING_NUMBER++;
+				if (PING_NUMBER > ARRAY_OF_IP_ADDRESSES.Length - 1)
 				{
-					numberOfPing = 0;
+					PING_NUMBER = 0;
 				}
-				Logger(DateTime.Now + ": Ping to: " + reply.Address + " Status: " + reply.Status);
+				Log(DateTime.Now + ": Ping to: " + pingReply.Address + " Status: " + pingReply.Status);
 			}
 			catch (PingException pingEx)
 			{
-				Logger(DateTime.Now + ": PingExcepion:" + pingEx.Message);
+				Log(DateTime.Now + ": Ping exception: " + pingEx.Message);
 			}
 			catch (Exception ex)
 			{
-				Logger(DateTime.Now + ": Exception:" + ex.Message);
+				Log(DateTime.Now + ": Unexpected exception: " + ex.Message);
 			}
 		}
-		private void Logger(string lines)
+		private static void Log(string message)
 		{
 			try
 			{
-				System.IO.StreamWriter file = new System.IO.StreamWriter("d:\\LogsMonitorInternetConnection\\" + DateTime.Today.ToShortDateString() + "Logs" + ".txt", true);
-				file.WriteLine(lines);
+				string fullPath = PATH + DateTime.Today.ToShortDateString() + SECOND_PART_OF_FILENAME;
+				var file = new StreamWriter(fullPath, true);
+				file.WriteLine(message);
 				file.Close();
 			}
 			catch (Exception ex)
