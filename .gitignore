@@ -2,7 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/MonitorInternetConnectionApplication/v14/.suo
 /MonitorInternetConnectionApplication/bin
 /MonitorInternetConnectionApplication/obj
 /MonitorInternetConnectionApplication/MonitorInternetConnectionApplication.csproj.user
+/.vs
