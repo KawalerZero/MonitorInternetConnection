@@ -2,7 +2,6 @@
 using MonitorInternetConnectionApplication.Interfaces;
 using MonitorInternetConnectionApplication.Wrappers;
 using Moq;
-using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Net.NetworkInformation;
