@@ -7,7 +7,7 @@ namespace MonitorInternetConnectionApplication
 	public class Logger : ILogger
 	{
 		private readonly string SECOND_PART_OF_FILENAME = "Logs.txt";
-		private readonly string folderForLogs = "MonitorInternetConnection";
+		private readonly string folderForLogs = "LogsMonitorInternetConnection";
 
 		public void Log(string message)
 		{

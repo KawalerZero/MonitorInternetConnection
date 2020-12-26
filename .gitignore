@@ -9,3 +9,5 @@
 /packages
 /MonitorInternetConnectionUnitTests/bin/Debug
 /MonitorInternetConnectionUnitTests/obj/Debug
+/MonitorInternetConnectionUnitTests/bin/Release
+/MonitorInternetConnectionUnitTests/obj/Release
