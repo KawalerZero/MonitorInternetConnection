@@ -1,2 +1,5 @@
 language: csharp
 solution: MonitorInternetConnectionApplication.sln
+install:
+  - nuget
+  - nuget restore MonitorInternetConnectionApplication.sln
