@@ -1,7 +1,9 @@
-﻿namespace MonitorInternetConnectionApplication.Interfaces
+﻿using MonitorInternetConnectionApplication.Wrappers;
+
+namespace MonitorInternetConnectionApplication.Interfaces
 {
 	public interface IPing
 	{
-		IPingReply SendPing(string hostNameOrAddress);
+		PingReplyWrapper SendPing(string hostNameOrAddress);
 	}
 }

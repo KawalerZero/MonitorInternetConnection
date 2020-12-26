@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using MonitorInternetConnectionApplication.Interfaces;
+﻿using System.Net.NetworkInformation;
 
 namespace MonitorInternetConnectionApplication.Wrappers
 {
-	public class PingReplyWrapper : IPingReply
+	public class PingReplyWrapper
 	{
-		public PingReplyWrapper(PingReply pingReply)
+		public PingReplyWrapper(IPStatus status, string address)
 		{
-			Status = pingReply.Status;
-			Address = pingReply.Address.ToString();
+			Status = status;
+			Address = address;
 		}
+
+		public PingReplyWrapper(PingReply pingReply) : this(pingReply.Status, pingReply.Address.ToString())
+		{}
+
 		public IPStatus Status { get; }
 		public string Address { get; }
 	}

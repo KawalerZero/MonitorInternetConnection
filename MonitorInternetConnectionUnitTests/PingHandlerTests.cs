@@ -1,5 +1,6 @@
 ﻿using MonitorInternetConnectionApplication;
 using MonitorInternetConnectionApplication.Interfaces;
+using MonitorInternetConnectionApplication.Wrappers;
 using Moq;
 using NSubstitute;
 using NUnit.Framework;
@@ -73,7 +74,6 @@ namespace MonitorInternetConnectionUnitTests
 		public void AfterSixPingsItShouldUseFirstIpAddressTwiceAndTheRestOnlyOnce()
 		{
 			//Arrange
-			IPingReply pingReply = Substitute.For<IPingReply>();
 			_pingMock.Setup(pingWrapper => pingWrapper.SendPing("139.130.4.5")).Returns(CreatePingReply("139.130.4.5"));
 			_pingMock.Setup(pingWrapper => pingWrapper.SendPing("204.15.21.255")).Returns(CreatePingReply("204.15.21.255"));
 			_pingMock.Setup(pingWrapper => pingWrapper.SendPing("212.77.101.5")).Returns(CreatePingReply("212.77.101.5"));
@@ -97,11 +97,9 @@ namespace MonitorInternetConnectionUnitTests
 				_loggerMock.Verify(logger => logger.Log("25.12.2020 00:00:11: Ping to: 8.8.8.8 Status: Success"), Times.Exactly(1));
 			});
 		}
-		private IPingReply CreatePingReply(string ipAddress)
+		private PingReplyWrapper CreatePingReply(string ipAddress)
 		{
-			IPingReply pingReply = Substitute.For<IPingReply>();
-			pingReply.Status.Returns(IPStatus.Success);
-			pingReply.Address.Returns(ipAddress);
+			PingReplyWrapper pingReply = new PingReplyWrapper(IPStatus.Success, ipAddress);
 			return pingReply;
 		}
 	}

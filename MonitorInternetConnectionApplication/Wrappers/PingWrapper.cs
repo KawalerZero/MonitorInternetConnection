@@ -1,14 +1,13 @@
-﻿using System.Net.NetworkInformation;
-using MonitorInternetConnectionApplication.Interfaces;
-using MonitorInternetConnectionApplication.Wrappers;
+﻿using MonitorInternetConnectionApplication.Interfaces;
+using System.Net.NetworkInformation;
 
-namespace MonitorInternetConnectionApplication
+namespace MonitorInternetConnectionApplication.Wrappers
 {
-	public class PingWrapper : Ping, IPing
+	public class PingWrapper : IPing
 	{
-		public IPingReply SendPing(string hostNameOrAddress)
+		public PingReplyWrapper SendPing(string hostNameOrAddress)
 		{
-			return new PingReplyWrapper(Send(hostNameOrAddress));
+			return new PingReplyWrapper(new Ping().Send(hostNameOrAddress));
 		}
 	}
 }

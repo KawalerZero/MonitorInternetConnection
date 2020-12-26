@@ -48,16 +48,13 @@
     <Compile Include="Interfaces\IDateTime.cs" />
     <Compile Include="Interfaces\ILogger.cs" />
     <Compile Include="Interfaces\IPing.cs" />
-    <Compile Include="Interfaces\IPingReply.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="PingHandler.cs" />
     <Compile Include="Wrappers\DateTimeWrapper.cs" />
     <Compile Include="Wrappers\PingReplyWrapper.cs" />
-    <Compile Include="Wrappers\PingWrapper.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrappers\PingWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
