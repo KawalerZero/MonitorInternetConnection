@@ -1,34 +1,44 @@
-﻿using System;
+﻿using MonitorInternetConnectionApplication.Interfaces;
+using System;
 using System.Net.NetworkInformation;
 namespace MonitorInternetConnectionApplication
 {
-	public static class PingHandler
+	public class PingHandler
 	{
-		private static readonly string[] ARRAY_OF_IP_ADDRESSES = { "139.130.4.5", "204.15.21.255", "212.77.101.5", "178.33.51.179", "8.8.8.8" };
-		private static int PING_NUMBER = 0;
-
-		public static void Ping()
+		public PingHandler(ILogger logger, IPing pingWrapper, IDateTime dateTimeWrapper)
 		{
-			Ping ping = new Ping();
+			_logger = logger;
+			_pingWrapper = pingWrapper;
+			_dateTimeWrapper = dateTimeWrapper;
+		}
+
+		private IDateTime _dateTimeWrapper;
+		private IPing _pingWrapper;
+		private ILogger _logger;
+		private readonly string[] ARRAY_OF_IP_ADDRESSES = { "139.130.4.5", "204.15.21.255", "212.77.101.5", "178.33.51.179", "8.8.8.8" };
+		private int _pingNumber = 0;
+
+		public void Ping()
+		{
 			try
 			{
-				var pingReply = ping.Send(ARRAY_OF_IP_ADDRESSES[PING_NUMBER]);
-				Logger.Log($"{DateTime.Now}: Ping to: {pingReply.Address} Status: {pingReply.Status}");
+				var pingReplyWrapper = _pingWrapper.SendPing(ARRAY_OF_IP_ADDRESSES[_pingNumber]);
+				_logger.Log($"{_dateTimeWrapper.Now()}: Ping to: {pingReplyWrapper.Address} Status: {pingReplyWrapper.Status}");
 			}
 			catch (PingException pingEx)
 			{
-				Logger.Log($"{DateTime.Now}: Ping to: {ARRAY_OF_IP_ADDRESSES[PING_NUMBER]} Ping exception: {pingEx.Message}");
+				_logger.Log($"{_dateTimeWrapper.Now()}: Ping to: {ARRAY_OF_IP_ADDRESSES[_pingNumber]} Ping exception: {pingEx.Message}");
 			}
 			catch (Exception ex)
 			{
-				Logger.Log($"{DateTime.Now}: Ping to: {ARRAY_OF_IP_ADDRESSES[PING_NUMBER]} Unexpected exception: {ex.Message}");
+				_logger.Log($"{_dateTimeWrapper.Now()}: Ping to: {ARRAY_OF_IP_ADDRESSES[_pingNumber]} Unexpected exception: {ex.Message}");
 			}
 			finally
 			{
-				PING_NUMBER++;
-				if (PING_NUMBER > ARRAY_OF_IP_ADDRESSES.Length - 1)
+				_pingNumber++;
+				if (_pingNumber > ARRAY_OF_IP_ADDRESSES.Length - 1)
 				{
-					PING_NUMBER = 0;
+					_pingNumber = 0;
 				}
 			}
 		}

@@ -6,3 +6,6 @@
 /MonitorInternetConnectionApplication/obj
 /MonitorInternetConnectionApplication/MonitorInternetConnectionApplication.csproj.user
 /.vs
+/packages
+/MonitorInternetConnectionUnitTests/bin/Debug
+/MonitorInternetConnectionUnitTests/obj/Debug

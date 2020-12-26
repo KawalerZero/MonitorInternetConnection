@@ -4,16 +4,18 @@ using System.Windows.Forms;
 
 namespace MonitorInternetConnectionApplication
 {
-	public static class Logger
+	public class Logger : ILogger
 	{
-		private static readonly string PATH = @"d:\LogsMonitorInternetConnection\";
-		private static readonly string SECOND_PART_OF_FILENAME = "Logs.txt";
+		private readonly string SECOND_PART_OF_FILENAME = "Logs.txt";
+		private readonly string folderForLogs = "MonitorInternetConnection";
 
-		public static void Log(string message)
+		public void Log(string message)
 		{
 			try
 			{
-				string fullPath = PATH + DateTime.Today.ToShortDateString() + SECOND_PART_OF_FILENAME;
+				string pathToLogs = $"{Directory.GetCurrentDirectory()}//{folderForLogs}";
+				Directory.CreateDirectory(pathToLogs);
+				string fullPath = $"{pathToLogs}//{DateTime.Today.ToShortDateString()}{SECOND_PART_OF_FILENAME}";
 				var file = new StreamWriter(fullPath, true);
 				file.WriteLine(message);
 				file.Close();

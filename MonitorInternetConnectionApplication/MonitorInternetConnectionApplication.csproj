@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MonitorInternetConnectionApplication</RootNamespace>
     <AssemblyName>MonitorInternetConnectionApplication</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -45,7 +45,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IDateTime.cs" />
+    <Compile Include="Interfaces\ILogger.cs" />
+    <Compile Include="Interfaces\IPing.cs" />
+    <Compile Include="Interfaces\IPingReply.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="PingHandler.cs" />
+    <Compile Include="Wrappers\DateTimeWrapper.cs" />
+    <Compile Include="Wrappers\PingReplyWrapper.cs" />
+    <Compile Include="Wrappers\PingWrapper.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

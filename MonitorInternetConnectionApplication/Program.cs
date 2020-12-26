@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MonitorInternetConnectionApplication.Wrappers;
+using System;
 using System.Threading;
 
 namespace MonitorInternetConnectionApplication
@@ -12,10 +13,15 @@ namespace MonitorInternetConnectionApplication
 		}
 		private static void InternetConnectionExamine()
 		{
+			Logger logger = new Logger();
+			PingWrapper pingWrapper = new PingWrapper();
+			DateTimeWrapper dateTimeWrapper = new DateTimeWrapper();
+			PingHandler _pingHandler = new PingHandler(logger, pingWrapper, dateTimeWrapper);
+			
 			while (true)
 			{
 				Thread.Sleep(60000);
-				PingHandler.Ping();
+				_pingHandler.Ping();
 				GC.Collect();
 			}
 		}
